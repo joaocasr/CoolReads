@@ -1,7 +1,5 @@
-# GenericOnlineLibrary
-its a generic online library
-working name:
-    * coolReads
+# CoolReads
+Online Library, CoolReads
 ## Overview
 
 <img src= "images/bookshelfall.JPG" width=450>
