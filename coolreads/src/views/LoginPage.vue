@@ -83,9 +83,19 @@ export default{
     },
   },
   created() {
-    if (this.loggedIn) {
-      this.$router.push(this.lastRoute);
+	console.log(this.$store.state.auth.status.loggedIn)
+	const token = localStorage.getItem('user');
+	console.log(token)
+	try {
+      const decodedToken = JSON.parse(token);
+	  console.log(decodedToken)
+      if(decodedToken!=null && decodedToken!=null && decodedToken.info!=null && decodedToken.info.exp<Date.now()/1000) {
+        this.handle_logout();
+      }
+    } catch (error) {
+      console.error('Error parsing user token:', error);
     }
+
   },
   methods: {
 	route(route) {

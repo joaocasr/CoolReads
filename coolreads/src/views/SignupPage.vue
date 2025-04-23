@@ -139,9 +139,19 @@ export default {
     },
   },
   created() {
-    if (this.loggedIn) {
-      this.$router.push('/profile');
-    }
+    console.log(this.$store.state.auth.status.loggedIn)
+    const token = localStorage.getItem('user');
+    console.log(token)
+    try {
+        const decodedToken = JSON.parse(token);
+        console.log(decodedToken)
+        if(decodedToken!=null && decodedToken!=null && decodedToken.info!=null && decodedToken.info.exp<Date.now()/1000) {
+          this.$router.push('/profile');
+        }
+        
+      } catch (error) {
+        console.error('Error parsing user token:', error);
+      }
   }
 };
 </script>

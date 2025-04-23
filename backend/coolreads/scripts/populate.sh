@@ -40,15 +40,6 @@ docker exec -it postgres psql -U postgres -d cool -c "INSERT INTO publisher (nam
 ('Culinary Creations Press', 'support@culinarycreationspress.com', 'https://culinarycreationsonline.com/wp-content/uploads/2019/01/txt_burgundy_nc_color.jpg', 'https://www.culinarycreationspress.com'),
 ('Mindful Living Publications', 'hello@mindfullivingpub.com', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGEFHuZ1C0Ok8pDTiSFkQ5HoE-iM9EhM4rXQ&s', 'https://www.mindfullivingpub.com');";
 
-docker exec -it postgres psql -U postgres -d cool -c "INSERT INTO customer (role, username, birth_date, country, description, email, gender, interests, name, password, profile_banner_url, profile_image_url, pronouns,highlighted_bookshelf_name) VALUES
-('customer', 'techguru', '1985-04-12', 'USA', 'Tech enthusiast and blogger', 'techguru@example.com', 'male', 'Technology, Gadgets, Coding', 'John Doe', '\$2a\$10\$EhVmXw6N4PLMGQa0t0BchuXA1y0VoJLn8szghkGkRiFUvHoopcyNy', 'https://example.com/banners/techguru.jpg', 'https://randomuser.me/api/portraits/men/1.jpg', 'he/him', 'bookshelf1'),
-('author', 'randallmunroe', '1988-06-15', 'Germany', 'Environmental activist and blogger', 'greenearth@example.com', 'female', 'Environment, Sustainability, Nature', 'Sophia Müller', '\$2a\$10\$EhVmXw6N4PLMGQa0t0BchuXA1y0VoJLn8szghkGkRiFUvHoopcyNy', 'https://example.com/banners/greenearth.jpg', 'https://randomuser.me/api/portraits/men/5.jpg', 'she/her', NULL),
-('author', 'jkrowling', '1987-09-12', 'Italy', 'Artist and art historian', 'artisanartist@example.com', 'male', 'Art, History, Painting', 'Luca Rossi', '\$2a\$10\$EhVmXw6N4PLMGQa0t0BchuXA1y0VoJLn8szghkGkRiFUvHoopcyNy', 'https://example.com/banners/artisanartist.jpg', 'https://randomuser.me/api/portraits/women/8.jpg', 'she/her', NULL),
-('customer', 'wellnessqueen', '1990-07-19', 'Canada', 'Wellness coach and nutritionist', 'wellnessqueen@example.com', 'female', 'Health, Nutrition, Yoga', 'Emily Clark', '\$2a\$10\$EhVmXw6N4PLMGQa0t0BchuXA1y0VoJLn8szghkGkRiFUvHoopcyNy', 'https://example.com/banners/wellnessqueen.jpg', 'https://randomuser.me/api/portraits/women/2.jpg', 'she/her', NULL),
-('customer', 'historybuff', '1978-03-25', 'UK', 'History professor and author', 'historybuff@example.com', 'male', 'History, Archaeology, Museums', 'Michael Smith', '\$2a\$10\$EhVmXw6N4PLMGQa0t0BchuXA1y0VoJLn8szghkGkRiFUvHoopcyNy', 'https://example.com/banners/historybuff.jpg', 'https://randomuser.me/api/portraits/men/3.jpg', 'he/him', NULL),
-('customer', 'fictionfan', '1992-11-08', 'Australia', 'Avid reader and fiction writer', 'fictionfan@example.com', 'non_binary', 'Literature, Writing, Reading', 'Alex Johnson', '\$2a\$10\$EhVmXw6N4PLMGQa0t0BchuXA1y0VoJLn8szghkGkRiFUvHoopcyNy', 'https://example.com/banners/fictionfan.jpg', 'https://randomuser.me/api/portraits/women/4.jpg', 'they/them', NULL);";
-
-
 docker exec -it postgres psql -U postgres -d cool -c "ALTER TABLE book ALTER COLUMN description TYPE TEXT;";
 
 docker exec -it postgres psql -U postgres -d cool -c "INSERT INTO book (isbn, description, image_url, launch_date, title, total_page_numbers, author_username, publisher_name) 
@@ -79,48 +70,4 @@ docker exec -it postgres psql -U postgres -d cool -c "INSERT INTO book_genres (b
 ('7','fantasy'),
 ('8','adventure'),
 ('8','fantasy');";
-
-docker exec -it postgres psql -U postgres -d cool -c "INSERT INTO review (book_isbn, customer_username, description, post_date) VALUES
-('1','techguru','Excelente leitura, muito envolvente e bem escrito.', '2024-05-01'),
-('1','historybuff','História interessante, mas o ritmo é um pouco lento.', '2024-05-02');";
-
-docker exec -it postgres psql -U postgres -d cool -c "INSERT INTO rating (book_isbn, customer_username, rating) VALUES
-('1','techguru',5),
-('1','historybuff',3);";
-
-docker exec -it postgres psql -U postgres -d cool -c "
-INSERT INTO bookshelf (id, name, privacy, customer_username) VALUES
-(1, 'currently_reading', 'PUBLIC', 'techguru'),
-(2, 'already_read', 'PUBLIC', 'techguru'),
-(3, 'did_not_finish', 'PUBLIC', 'techguru'),
-(4, 'want_to_read', 'PUBLIC', 'techguru'),
-(5, 'bookshelf1', 'PUBLIC', 'techguru'),
-(6, 'currently_reading', 'PUBLIC', 'jkrowling'),
-(7, 'already_read', 'PUBLIC', 'jkrowling'),
-(8, 'did_not_finish', 'PUBLIC', 'jkrowling'),
-(9, 'want_to_read', 'PUBLIC', 'jkrowling'),
-(10, 'bookshelf1', 'PUBLIC', 'jkrowling');";
-
-docker exec -it postgres psql -U postgres -d cool -c "
-INSERT INTO personal_book (insert_date, pages_read, book_isbn, customer_username)
-values
-('2000-01-01', 100, '1', 'techguru'),
-('2000-02-01', 100, '2', 'techguru'),
-('2000-03-01', 100, '3', 'techguru'),
-('2000-04-01', 100, '4', 'techguru'),
-('2001-05-01', 100, '5', 'techguru'),
-('2001-01-01', 100, '6', 'techguru'),
-('2007-01-01', 100, '7', 'techguru');";
-
-docker exec -it postgres psql -U postgres -d cool -c "
-INSERT INTO bookshelf_personalbook ( personalbook_id, bookshelf_id)
-values
-('1','1'),
-('2','2'),
-('3','3'),
-('4','4'),
-('5','5'),
-('6','6'),
-('7','7');";
-
 
